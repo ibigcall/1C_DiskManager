@@ -1,0 +1,64 @@
+﻿<Window x:Class="ConfigurationManagerWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ConfigurationManagerWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.9*" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Локальные конфигурации" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Text="Конфигурации на диске" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"></TextBlock>
+        <ListBox Name="ConfigurationsListBox" ItemsSource="{Binding Path=Configurations}" Grid.Column="1" Grid.Row="1">
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Copy" Click="copy"></MenuItem>
+                    <MenuItem Header="Install" Click="install_click"></MenuItem>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Grid.Column="0" Margin="5" > 
+                        <TextBlock FontSize="10" Text="{Binding Path=UpdOrSetup}" HorizontalAlignment="Right" />
+                        <TextBlock FontSize="16" Text="{Binding Path=Name}" HorizontalAlignment="Center" />
+                        <TextBlock FontSize="16" Text="{Binding Path=Version}" HorizontalAlignment="Center" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox Name="ConfigurationsListBox3" ItemsSource="{Binding Path=LocalConfigurations}" Grid.Column="0" Grid.Row="1">
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Install" Click="install_local_click"></MenuItem>
+                    <MenuItem Header="Delete" Click="delete_click"></MenuItem>
+                </ContextMenu>
+                </ListBox.ContextMenu>
+             <ListBox.ItemTemplate >
+                <DataTemplate>
+                    <StackPanel Grid.Column="0" Margin="5">
+                        <TextBlock FontSize="10" Text="{Binding Path=UpdOrSetup}" HorizontalAlignment="Right" />
+                        <TextBlock FontSize="16" Text="{Binding Path=Name}" HorizontalAlignment="Center" />
+                        <TextBlock FontSize="16" Text="{Binding Path=Version}" HorizontalAlignment="Center" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox Name="ButtonBox"  Grid.Column="2" Grid.Row="1">
+            <Button Name="ChooseFolderButton" Click="openclick">Выбрать папку для коипрования</Button>
+            <TextBox Name="LocalFolderPath"></TextBox>
+            <Button Name="CopyAll" Click="copy_all" >Копировать все</Button>
+        </ListBox>
+    </Grid> 
+</Window>
+   
